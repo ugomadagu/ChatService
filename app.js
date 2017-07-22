@@ -18,7 +18,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/chatroom/543', function (chatmessageresponse) {
+        stompClient.subscribe('/topic/chatroom/543', function (chatmessageresponse) {
             showGreeting(JSON.parse(chatmessageresponse.body).content);
         });
     });
