@@ -1,13 +1,13 @@
-package hello;
+package chat;
 
-public class Greeting {
+public class ChatMessageResponse {
 
     private String content;
 
-    public Greeting() {
+    public ChatMessageResponse() {
     }
 
-    public Greeting(String content) {
+    public ChatMessageResponse(String content) {
         this.content = content;
     }
 
