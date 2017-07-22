@@ -11,7 +11,7 @@ public class ChatRoomController {
     @MessageMapping("/chatroomapi/{chatId}")
     @SendTo("/topic/chatroom/{chatId}")
     public ChatMessageResponse sendMessage(@DestinationVariable String chatId, ChatMessage message) throws Exception {
-        return new ChatMessageResponse(message.getMessage() + ": with ID " + chatId);
+        return new ChatMessageResponse("Matt234: " + message.getMessage());
     }
 
 }
