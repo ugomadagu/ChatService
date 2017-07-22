@@ -2,3 +2,4 @@ build/
 .idea/
 .gradle/
 ChatService.iml
+.DS_Store
