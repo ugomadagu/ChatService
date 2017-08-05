@@ -33,7 +33,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/chatroomapi/543", {}, JSON.stringify(
+    stompClient.send("/api/chatroomapi/543", {}, JSON.stringify(
     {
         'message': $("#message").val(),
         'userNameOfSender': $("#userName").val(),
