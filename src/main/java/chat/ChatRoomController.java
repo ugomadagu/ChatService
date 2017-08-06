@@ -5,10 +5,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,6 +34,7 @@ public class ChatRoomController {
         return new ChatMessageResponse( message.getUserNameOfSender() + ": " + message.getMessage());
     }
 
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(path="/api/chatrooms/{chatRoomId}/messages", method=RequestMethod.GET)
     public @ResponseBody Iterable<ChatMessage> getAllMessagesForChatroom(@PathVariable String chatRoomId) {
         return chatMessageRepository.findByChatRoomId(Integer.parseInt(chatRoomId));

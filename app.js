@@ -7,9 +7,9 @@ function setConnected(connected) {
         $("#conversation").show();
     }
     else {
-        $("#conversation").hide();
+        $("#conversation").value = "";
     }
-    $("#greetings").html("");
+    $("#chatRoomMessages").html("");
 }
 
 function connect() {
@@ -18,8 +18,9 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/chatroom/543', function (chatmessageresponse) {
-            showGreeting(JSON.parse(chatmessageresponse.body).content);
+        displayOldMessages();
+        stompClient.subscribe('/topic/chatroom/' + $("#chatRoomId").val(), function (chatmessageresponse) {
+            appendMessage(JSON.parse(chatmessageresponse.body).content);
         });
     });
 }
@@ -33,7 +34,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/api/chatroomapi/543", {}, JSON.stringify(
+    stompClient.send("/api/chatroomapi/" + $("#chatRoomId").val(), {}, JSON.stringify(
     {
         'message': $("#message").val(),
         'userNameOfSender': $("#userName").val(),
@@ -41,8 +42,17 @@ function sendName() {
     ));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+function appendMessage(message) {
+    $("#chatRoomMessages").append("<tr><td>" + message + "</td></tr>");
+    document.getElementById("message").value = "";
+}
+
+function displayOldMessages() {
+    $.get("http://localhost:8080/api/chatrooms/" + $("#chatRoomId").val() + "/messages", function(data, status){
+        for(var i = 0; i < data.length; i++) {
+            appendMessage(data[i].userNameOfSender + ": " + data[i].message);
+        }
+    });
 }
 
 $(function () {
