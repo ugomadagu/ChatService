@@ -5,7 +5,7 @@ module.exports = React.createClass({
 
     return <div className="input-group" style={{marginTop: '5px'}}>
       <span className="input-group-addon" id="basic-addon1">{this.props.textBoxTitle}</span>
-      <input type={this.props.type} className="form-control" placeholder={this.props.placeholder} aria-describedby="basic-addon1"/>
+      <input id={this.props.id} type={this.props.type} className="form-control" placeholder={this.props.placeholder} aria-describedby="basic-addon1"/>
     </div>
   }
 });

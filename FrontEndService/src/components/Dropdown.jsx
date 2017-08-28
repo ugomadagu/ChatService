@@ -18,6 +18,7 @@ module.exports = React.createClass({
       open: false,
       itemTitle: item
     });
+    this.props.sendUpdate(item)
   },
   render: function() {
     var list = this.props.items.map(function(item){

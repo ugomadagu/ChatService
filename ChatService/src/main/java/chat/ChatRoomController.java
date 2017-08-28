@@ -11,13 +11,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Controller
 public class ChatRoomController {
-
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private MessageRepository chatMessageRepository;
@@ -34,7 +29,7 @@ public class ChatRoomController {
         return new ChatMessageResponse( message.getUserNameOfSender() + ": " + message.getMessage());
     }
 
-    @CrossOrigin(origins = "http://localhost:8000")
+    @CrossOrigin(origins = "*")
     @RequestMapping(path="/api/chatrooms/{chatRoomId}/messages", method=RequestMethod.GET)
     public @ResponseBody Iterable<ChatMessage> getAllMessagesForChatroom(@PathVariable String chatRoomId) {
         return chatMessageRepository.findByChatRoomId(Integer.parseInt(chatRoomId));
